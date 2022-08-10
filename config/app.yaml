@@ -1,0 +1,13 @@
+name: ceywing_service_api
+mode: DEBUG
+host: 0.0.0.0
+port: 8080
+timezone: GMT+0530
+
+metrics:
+  enabled: true
+  port: 7003
+  route: /metrics
+
+data:
+  radius_sync_interval: 5000
