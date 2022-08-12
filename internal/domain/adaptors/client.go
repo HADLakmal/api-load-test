@@ -15,13 +15,12 @@ type Client struct {
 	HttpClient *http.Client
 }
 
-func Init() *Client {
-	return &Client{
-		HttpClient: &http.Client{},
-	}
+func Init() Client {
+	return Client{}
 }
 
-func (a *Client) FetchGeneric(payload unpackers.Generic, req *http.Request) error {
+func (a Client) FetchGeneric(payload unpackers.Generic, req *http.Request) error {
+	a.HttpClient = &http.Client{}
 	r, err := createRequest(payload, req)
 
 	res, err := a.HttpClient.Do(r)

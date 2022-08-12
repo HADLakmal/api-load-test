@@ -30,16 +30,17 @@ func (ctl *Generic) Execute(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var success int
-	cl := adaptors.Init()
+
 	wg := sync.WaitGroup{}
 	for x := 0; x < int(a.Parallelism); x++ {
 		go func() {
+			cl := adaptors.Init()
 			wg.Add(1)
 			errGen := cl.FetchGeneric(a, r)
 			if errGen != nil {
 				log.Error(errGen.Error())
 			}
-			cl.HttpClient.CloseIdleConnections()
+			log.Debug(`success`)
 			success++
 			wg.Done()
 		}()
